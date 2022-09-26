@@ -8,4 +8,10 @@ http://example.com/
 http://example.com/tags/jQuery/
 http://example.com/tags/%E8%A1%A8%E6%A0%BC/
 http://example.com/tags/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/
+http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
+http://example.com/tags/JAVA/
+http://example.com/tags/MySQL/
+http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/
 http://example.com/categories/web%E5%89%8D%E7%AB%AF/
+http://example.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
+http://example.com/categories/MySQL/
