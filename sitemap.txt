@@ -1,3 +1,8 @@
+http://example.com/article/0.html
+http://example.com/article/0.html
+http://example.com/article/0.html
+http://example.com/article/0.html
+http://example.com/article/0.html
 http://example.com/article/20220920.html
 http://example.com/article/20220921.html
 http://example.com/article/20220922.html
