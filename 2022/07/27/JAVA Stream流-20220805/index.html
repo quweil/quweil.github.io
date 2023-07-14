@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JAVA Stream流 | 神秘彩虹海</title><meta name="author" content="狸猫不吃鱼"><meta name="copyright" content="狸猫不吃鱼"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Stream流简介 Stream（流）是一个来自数据源的元素队列，元素是特定类型的对象，形成一个队列。 Java中的Stream并不会存储元素，而是按需计算。数据源：流的来源，可以是集合，数组 等。  Stream流的构成创建Stream   API 功能说明    stream() 创建出一个新的stream串行流对象   parallelStream() 创建出一个可并行执行的stream流对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA Stream流">
+<meta property="og:url" content="http://blog.mrlinlin.top/2022/07/27/JAVA%20Stream%E6%B5%81-20220805/index.html">
+<meta property="og:site_name" content="神秘彩虹海">
+<meta property="og:description" content="Stream流简介 Stream（流）是一个来自数据源的元素队列，元素是特定类型的对象，形成一个队列。 Java中的Stream并不会存储元素，而是按需计算。数据源：流的来源，可以是集合，数组 等。  Stream流的构成创建Stream   API 功能说明    stream() 创建出一个新的stream串行流对象   parallelStream() 创建出一个可并行执行的stream流对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.mrlinlin.top/img/art-img/001%20(2).jpg">
+<meta property="article:published_time" content="2022-07-27T08:03:11.141Z">
+<meta property="article:modified_time" content="2022-09-27T09:25:15.245Z">
+<meta property="article:author" content="狸猫不吃鱼">
+<meta property="article:tag" content="JAVA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.mrlinlin.top/img/art-img/001%20(2).jpg"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://blog.mrlinlin.top/2022/07/27/JAVA%20Stream%E6%B5%81-20220805/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JAVA Stream流',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-27 17:25:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss/background.css"><link rel="stylesheet" href="/css/mycss/scoller.css"><link rel="stylesheet" href="/css/mycss/gradient.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="神秘彩虹海" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/tou.jpg" onerror="onerror=null;src='/img/loading.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/art-img/001%20(2).jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="神秘彩虹海"><span class="site-name">神秘彩虹海</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JAVA Stream流</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-27T08:03:11.141Z" title="发表于 2022-07-27 16:03:11">2022-07-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-27T09:25:15.245Z" title="更新于 2022-09-27 17:25:15">2022-09-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF%E5%BF%85%E5%A4%87/">后端必备</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JAVA Stream流"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Stream流简介"><a href="#Stream流简介" class="headerlink" title="Stream流简介"></a>Stream流简介</h2><blockquote>
+<p>Stream（流）是一个来自数据源的元素队列，元素是特定类型的对象，形成一个队列。 Java中的Stream并不会存储元素，而是按需计算。数据源：流的来源，可以是集合，数组 等。</p>
+</blockquote>
+<h3 id="Stream流的构成"><a href="#Stream流的构成" class="headerlink" title="Stream流的构成"></a>Stream流的构成</h3><h4 id="创建Stream"><a href="#创建Stream" class="headerlink" title="创建Stream"></a>创建Stream</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stream()</td>
+<td>创建出一个新的stream串行流对象</td>
+</tr>
+<tr>
+<td>parallelStream()</td>
+<td>创建出一个可并行执行的stream流对象</td>
+</tr>
+<tr>
+<td>Stream.of()</td>
+<td>通过给定的一系列元素创建一个新的Stream串行流对象</td>
+</tr>
+</tbody></table>
+<h4 id="对流进行业务操作"><a href="#对流进行业务操作" class="headerlink" title="对流进行业务操作"></a>对流进行业务操作</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filter()</td>
+<td>按照条件过滤符合要求的元素， 返回新的stream流</td>
+</tr>
+<tr>
+<td>map()</td>
+<td>将已有元素转换为另一个对象类型，一对一逻辑，返回新的stream流</td>
+</tr>
+<tr>
+<td>flatMap()</td>
+<td>将已有元素转换为另一个对象类型，一对多逻辑，即原来一个元素对象可能会转换为1个或者多个新类型的元素，返回新的stream流</td>
+</tr>
+<tr>
+<td>limit()</td>
+<td>仅保留集合前面指定个数的元素，返回新的stream流</td>
+</tr>
+<tr>
+<td>skip()</td>
+<td>跳过集合前面指定个数的元素，返回新的stream流</td>
+</tr>
+<tr>
+<td>concat()</td>
+<td>将两个流的数据合并起来为1个新的流，返回新的stream流</td>
+</tr>
+<tr>
+<td>distinct()</td>
+<td>对Stream中所有元素进行去重，返回新的stream流</td>
+</tr>
+<tr>
+<td>sorted()</td>
+<td>对stream中所有的元素按照指定规则进行排序，返回新的stream流</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>对stream流中的每个元素进行逐个遍历处理，返回处理后的stream流</td>
+</tr>
+</tbody></table>
+<h4 id="对流进行回收操作"><a href="#对流进行回收操作" class="headerlink" title="对流进行回收操作"></a>对流进行回收操作</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count()</td>
+<td>返回stream处理后最终的元素个数</td>
+</tr>
+<tr>
+<td>max()</td>
+<td>返回stream处理后的元素最大值</td>
+</tr>
+<tr>
+<td>min()</td>
+<td>返回stream处理后的元素最小值</td>
+</tr>
+<tr>
+<td>findFirst()</td>
+<td>找到第一个符合条件的元素时则终止流处理</td>
+</tr>
+<tr>
+<td>findAny()</td>
+<td>找到任何一个符合条件的元素时则退出流处理，这个对于串行流时与findFirst相同，对于并行流时比较高效，任何分片中找到都会终止后续计算逻辑</td>
+</tr>
+<tr>
+<td>anyMatch()</td>
+<td>返回一个boolean值，类似于isContains(),用于判断是否有符合条件的元素</td>
+</tr>
+<tr>
+<td>allMatch()</td>
+<td>返回一个boolean值，用于判断是否所有元素都符合条件</td>
+</tr>
+<tr>
+<td>noneMatch()</td>
+<td>返回一个boolean值， 用于判断是否所有元素都不符合条件</td>
+</tr>
+<tr>
+<td>collect()</td>
+<td>将流转换为指定的类型，通过Collectors进行指定</td>
+</tr>
+<tr>
+<td>toArray()</td>
+<td>将流转换为数组</td>
+</tr>
+<tr>
+<td>iterator()</td>
+<td>将流转换为Iterator对象</td>
+</tr>
+<tr>
+<td>foreach()</td>
+<td>无返回值，对元素进行逐个遍历，然后执行给定的处理逻辑</td>
+</tr>
+</tbody></table>
+<h3 id="Stream常用"><a href="#Stream常用" class="headerlink" title="Stream常用"></a>Stream常用</h3><h4 id="中间处理"><a href="#中间处理" class="headerlink" title="中间处理"></a>中间处理</h4><h5 id="过滤-filter"><a href="#过滤-filter" class="headerlink" title="过滤(filter)"></a>过滤(filter)</h5>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.filter(s -&gt; Objects.equals(s.getSex(), <span class="string">&quot;男&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上操作表示过滤出所有性别为”男“的学生；</p>
+<p>上述代码等效于：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.filter(<span class="keyword">new</span> <span class="title class_">Predicate</span>()&#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">test</span><span class="params">(Student s)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> Objects.equals(s.getSex,<span class="string">&quot;男&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>注意事项：</p>
+<p>过滤处理可根据需求多次执行</p>
+</blockquote>
+<h4 id="去除重复-distinct"><a href="#去除重复-distinct" class="headerlink" title="去除重复(distinct)"></a>去除重复(distinct)</h4>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.distinct(); </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>去除重复元素：依据集合中元素的equals方法和hashcode方法</p>
+</blockquote>
+<h5 id="排序（sorted）"><a href="#排序（sorted）" class="headerlink" title="排序（sorted）"></a>排序（sorted）</h5>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.sorted((s1,s2) -&gt; (<span class="type">int</span>)(s1.getScore()-s2.getScore()))  </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上操作根据学生的学分从低到高排序</p>
+<p>代码等效于：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.sorted(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Student&gt;()&#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Student s1,Student s2)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> (<span class="type">int</span>)(s1.getScore()-s2.getScore());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>若集合中元素有实现过<code>comparable</code>接口，则可直接使用以下方法时完成排序:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.sorted()</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="跳过-skip"><a href="#跳过-skip" class="headerlink" title="跳过(skip)"></a>跳过(skip)</h5>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.skip(<span class="number">2</span>);	<span class="comment">//跳过的数据行数</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="限制数据行数（limit）"><a href="#限制数据行数（limit）" class="headerlink" title="限制数据行数（limit）"></a>限制数据行数（limit）</h5>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream = stream.limit(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="结尾处理"><a href="#结尾处理" class="headerlink" title="结尾处理"></a>结尾处理</h4><p>结尾处理即意味着中间处理已完成，等待最终操作，比如收集，统计，迭代等操作。由于结果为最终执行项，因此不可重复调用不同的结尾处理方式，否则会出现异常：</p>
+<h5 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h5>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上代码可以使用如下写法:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stream.forEach(s-&gt;System.out.println(s));</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h5>  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> stream.count();</span><br></pre></td></tr></table></figure>
+
+<h5 id="收集"><a href="#收集" class="headerlink" title="收集"></a>收集</h5><p>  收集指的是将中间处理之后满足条件的结果存放到集合并返回</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Student&gt; listStu = stream.collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+<h5 id="链式编程"><a href="#链式编程" class="headerlink" title="链式编程"></a>链式编程</h5><p>对以上Stream的使用可以通过一行代码实现，具体如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; names = list.stream()	<span class="comment">//1.获取流</span></span><br><span class="line">    .filter(s -&gt; Objects.equals(s.getSex(), <span class="string">&quot;男&quot;</span>))  <span class="comment">//2.中间处理  过滤</span></span><br><span class="line">    .filter(s -&gt; s.getScore() &gt;= <span class="number">60</span>) <span class="comment">//2.中间处理 过滤</span></span><br><span class="line">    .distinct() <span class="comment">//2.中间处理 去除重复</span></span><br><span class="line">    .sorted((s1,s2) -&gt; (<span class="type">int</span>)(s1.getScore()-s2.getScore())) <span class="comment">//2.中间处理 排序</span></span><br><span class="line">    .skip(<span class="number">2</span>) <span class="comment">//2.中间处理  跳过</span></span><br><span class="line">    .limit(<span class="number">5</span>) <span class="comment">//2.中间处理  限制结果行数</span></span><br><span class="line">    .map(s-&gt;s.getName()) <span class="comment">//2.中间处理  映射(获取属性子集)</span></span><br><span class="line">    .collect(Collectors.toList());  <span class="comment">//3.结尾处理</span></span><br></pre></td></tr></table></figure>
+
+
+<p>后续补充….</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.mrlinlin.top">狸猫不吃鱼</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.mrlinlin.top/2022/07/27/JAVA%20Stream%E6%B5%81-20220805/">http://blog.mrlinlin.top/2022/07/27/JAVA Stream流-20220805/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.mrlinlin.top" target="_blank">神秘彩虹海</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JAVA/">JAVA</a></div><div class="post_share"><div class="social-share" data-image="/img/art-img/001%20(2).jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading.gif" data-original="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading.gif" data-original="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/05/MySQL%E4%BC%98%E5%8C%96%E5%9F%BA%E7%A1%80-20220810/" title="MySQL优化基础"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(6).jpg" onerror="onerror=null;src='/img/loading.gif'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MySQL优化基础</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/06/%E7%99%BD%E8%8F%9C%E6%B1%A4-20220510/" title="白菜汤"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(14).jpg" onerror="onerror=null;src='/img/loading.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">白菜汤</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/24/JAVA%20activiti6%E5%9B%9E%E9%80%80%E5%92%8C%E8%B7%B3%E8%BD%AC%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0-20220824/" title="JAVA activiti6回退和跳转功能实现"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(1).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-24</div><div class="title">JAVA activiti6回退和跳转功能实现</div></div></a></div><div><a href="/2022/08/23/JAVA%20%E6%B3%9B%E5%9E%8B-20220823/" title="JAVA 泛型"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(3).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-23</div><div class="title">JAVA 泛型</div></div></a></div><div><a href="/2022/08/05/MySQL%E4%BC%98%E5%8C%96%E5%9F%BA%E7%A1%80-20220810/" title="MySQL优化基础"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(6).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-05</div><div class="title">MySQL优化基础</div></div></a></div><div><a href="/2022/09/30/MySQL%E9%80%BB%E8%BE%91%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84-20221001/" title="MySQL逻辑体系架构"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(5).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-30</div><div class="title">MySQL逻辑体系架构</div></div></a></div><div><a href="/2022/10/25/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9%E3%80%81%E9%A2%84%E7%83%AD%E3%80%81%E6%9B%B4%E6%96%B0%E3%80%81%E9%99%8D%E7%BA%A7-20221025/" title="Redis学习笔记之缓存穿透、击穿、雪崩、预热、更新、降级"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(8).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-25</div><div class="title">Redis学习笔记之缓存穿透、击穿、雪崩、预热、更新、降级</div></div></a></div><div><a href="/2022/10/09/SQL%E5%9F%BA%E7%A1%80%E4%B9%8BSQL%E8%AF%AD%E8%A8%80%E5%88%86%E7%B1%BB-20221005/" title="SQL基础之SQL语言分类"><img class="cover" src="/img/loading.gif" data-original="/img/art-img/001%20(10).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-09</div><div class="title">SQL基础之SQL语言分类</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/tou.jpg" onerror="this.onerror=null;this.src='/img/loading.gif'" alt="avatar"/></div><div class="author-info__name">狸猫不吃鱼</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/quweil" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1642455874@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS链接"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到狸猫不吃鱼的博客,如果喜欢请CTRL+D收藏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Stream%E6%B5%81%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Stream流简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream%E6%B5%81%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">1.1.</span> <span class="toc-text">Stream流的构成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAStream"><span class="toc-number">1.1.1.</span> <span class="toc-text">创建Stream</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%B5%81%E8%BF%9B%E8%A1%8C%E4%B8%9A%E5%8A%A1%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">对流进行业务操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%B5%81%E8%BF%9B%E8%A1%8C%E5%9B%9E%E6%94%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.3.</span> <span class="toc-text">对流进行回收操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream%E5%B8%B8%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">Stream常用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E5%A4%84%E7%90%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">中间处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4-filter"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">过滤(filter)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D-distinct"><span class="toc-number">1.2.2.</span> <span class="toc-text">去除重复(distinct)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%EF%BC%88sorted%EF%BC%89"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">排序（sorted）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B7%B3%E8%BF%87-skip"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">跳过(skip)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E6%95%B0%E6%8D%AE%E8%A1%8C%E6%95%B0%EF%BC%88limit%EF%BC%89"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">限制数据行数（limit）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE%E5%A4%84%E7%90%86"><span class="toc-number">1.2.3.</span> <span class="toc-text">结尾处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">迭代</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">统计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%94%B6%E9%9B%86"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">收集</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">链式编程</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9%E3%80%81%E9%A2%84%E7%83%AD%E3%80%81%E6%9B%B4%E6%96%B0%E3%80%81%E9%99%8D%E7%BA%A7-20221025/" title="Redis学习笔记之缓存穿透、击穿、雪崩、预热、更新、降级"><img src="/img/loading.gif" data-original="/img/art-img/001%20(8).jpg" onerror="this.onerror=null;this.src='/img/loading.gif'" alt="Redis学习笔记之缓存穿透、击穿、雪崩、预热、更新、降级"/></a><div class="content"><a class="title" href="/2022/10/25/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9%E3%80%81%E9%A2%84%E7%83%AD%E3%80%81%E6%9B%B4%E6%96%B0%E3%80%81%E9%99%8D%E7%BA%A7-20221025/" title="Redis学习笔记之缓存穿透、击穿、雪崩、预热、更新、降级">Redis学习笔记之缓存穿透、击穿、雪崩、预热、更新、降级</a><time datetime="2022-10-25T05:40:08.967Z" title="发表于 2022-10-25 13:40:08">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/17/Springcloud%E5%85%A5%E9%97%A8-20221018/" title="Springcloud入门"><img src="/img/loading.gif" data-original="/img/art-img/001%20(9).jpg" onerror="this.onerror=null;this.src='/img/loading.gif'" alt="Springcloud入门"/></a><div class="content"><a class="title" href="/2022/10/17/Springcloud%E5%85%A5%E9%97%A8-20221018/" title="Springcloud入门">Springcloud入门</a><time datetime="2022-10-17T09:02:43.658Z" title="发表于 2022-10-17 17:02:43">2022-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/12/SQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%87%BD%E6%95%B0%E8%A1%A5%E5%85%85%EF%BC%88MySQL%E7%89%88%EF%BC%89-20221011/" title="SQL基础之函数补充（MySQL版）"><img src="/img/loading.gif" data-original="/img/art-img/001%20(11).jpg" onerror="this.onerror=null;this.src='/img/loading.gif'" alt="SQL基础之函数补充（MySQL版）"/></a><div class="content"><a class="title" href="/2022/10/12/SQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%87%BD%E6%95%B0%E8%A1%A5%E5%85%85%EF%BC%88MySQL%E7%89%88%EF%BC%89-20221011/" title="SQL基础之函数补充（MySQL版）">SQL基础之函数补充（MySQL版）</a><time datetime="2022-10-12T02:58:35.999Z" title="发表于 2022-10-12 10:58:35">2022-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/11/SQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%A7%86%E5%9B%BE-20221010/" title="SQL基础之视图"><img src="/img/loading.gif" data-original="/img/art-img/001%20(13).jpg" onerror="this.onerror=null;this.src='/img/loading.gif'" alt="SQL基础之视图"/></a><div class="content"><a class="title" href="/2022/10/11/SQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%A7%86%E5%9B%BE-20221010/" title="SQL基础之视图">SQL基础之视图</a><time datetime="2022-10-11T06:29:18.676Z" title="发表于 2022-10-11 14:29:18">2022-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/10/SQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%EF%BC%88MySQL%E7%89%88%EF%BC%89-20221009/" title="SQL基础之内置函数（MySQL版）"><img src="/img/loading.gif" data-original="/img/art-img/001%20(12).jpg" onerror="this.onerror=null;this.src='/img/loading.gif'" alt="SQL基础之内置函数（MySQL版）"/></a><div class="content"><a class="title" href="/2022/10/10/SQL%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%EF%BC%88MySQL%E7%89%88%EF%BC%89-20221009/" title="SQL基础之内置函数（MySQL版）">SQL基础之内置函数（MySQL版）</a><time datetime="2022-10-10T06:18:54.681Z" title="发表于 2022-10-10 14:18:54">2022-10-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 狸猫不吃鱼</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end -->
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
